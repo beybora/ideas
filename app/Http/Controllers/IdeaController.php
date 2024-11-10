@@ -13,6 +13,6 @@ class IdeaController
             'content' => request()->get('idea','')
         ]);
         $idea->save();
-        return redirect()->route('dashboard');
+        return redirect()->route('dashboard')->with('success', 'Idea created succesfully!');
     }
 }
