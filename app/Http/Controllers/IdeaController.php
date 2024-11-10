@@ -9,6 +9,10 @@ class IdeaController
 {
     public function store() {
 
+        request()->validate([
+            'idea' => 'required|min:5|max:255'
+        ] );
+
         $idea = new Idea([
             'content' => request()->get('idea','')
         ]);
