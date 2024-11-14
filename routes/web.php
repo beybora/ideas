@@ -11,8 +11,12 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
 
 Route::get('/terms', [TermsController::class, 'index']);
 
-Route::post('/idea', [IdeaController::class, 'store'])->name('idea.create');
+Route::post('/ideas', [IdeaController::class, 'store'])->name('ideas.create');
 
-Route::delete('/idea/{id}', [IdeaController::class, 'destroy'])->name('idea.destroy');
+Route::delete('/ideas/{idea}', [IdeaController::class, 'destroy'])->name('ideas.destroy');
 
-Route::get(('/idea/{id}'), [IdeaController::class, 'show'])->name('idea.show');
+Route::get(('/ideas/{idea}'), [IdeaController::class, 'show'])->name('ideas.show');
+
+Route::get('/ideas/{idea}/edit', [IdeaController::class, 'edit'])->name('ideas.edit');
+
+Route::put('/ideas/{idea}', [IdeaController::class, 'update'])->name('ideas.update');

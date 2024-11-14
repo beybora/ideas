@@ -8,18 +8,38 @@
                     <h5 class="card-title mb-0"><a href="#"> Mario </a></h5>
                 </div>
             </div>
-            <form method="POST" action={{ route('idea.destroy', $idea->id) }}>
-                @method('DELETE')
-                @csrf
-                <div> <button class="btn btn-danger btn-sm"> X </div>
-            </form>
-            <a href={{   route('idea.show', $idea->id) }}> View </a>
+            <div class="d-flex">
+                <a href={{ route('ideas.show', $idea->id) }}> View </a>
+                <a href={{ route('ideas.edit', $idea->id) }}> Edit </a>
+                <form method="POST" action={{ route('ideas.destroy', $idea->id) }}>
+                    @method('DELETE')
+                    @csrf
+                    <button class="btn btn-danger btn-sm"> X </button>
+                </form>
+            </div>
+
         </div>
     </div>
     <div class="card-body">
-        <p class="fs-6 fw-light text-muted">
-            {{ $idea->content }}
-        </p>
+        @if ($editing ?? false)
+            <form action={{ route('ideas.update', $idea->id) }} method="post">
+                @csrf
+                @method('PUT')
+                <div class="mb-3">
+                    <textarea name="content" class="form-control" id="content" rows="3">{{ $idea->content }}</textarea>
+                    @error('idea')
+                        <span class="d-block fs-6 text-danger mt-2"> {{ $message }} </span>
+                    @enderror
+                </div>
+                <div class="">
+                    <button class="btn btn-dark"> Update </button>
+                </div>
+            @else
+                <p class="fs-6 fw-light text-muted">
+                    {{ $idea->content }}
+                </p>
+        @endif
+
         <div class="d-flex justify-content-between">
             <div>
                 <a href="#" class="fw-light nav-link fs-6"> <span class="fas fa-heart me-1">
