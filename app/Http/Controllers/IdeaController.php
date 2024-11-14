@@ -22,9 +22,15 @@ class IdeaController
 
     public function destroy($id) {
 
-        $idea = Idea::where('id', $id)->first();
-        $idea->delete();
+        $idea = Idea::where('id', $id)->firstOrFail()->delete();
 
         return redirect()->route('dashboard')->with('success', 'Idea deleted succesfully!');
     }
+
+    public function show(Idea $id) {
+        return view('ideas.show', [
+            'idea' => $id
+        ]);
+    }
+
 }
