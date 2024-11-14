@@ -13,7 +13,7 @@
                 @csrf
                 <div> <button class="btn btn-danger btn-sm"> X </div>
             </form>
-
+            <a href={{   route('idea.show', $idea->id) }}> View </a>
         </div>
     </div>
     <div class="card-body">
