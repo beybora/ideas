@@ -50,16 +50,6 @@
                     {{ $idea->created_at }} </span>
             </div>
         </div>
-        <div>
-            <div class="mb-3">
-                <textarea class="fs-6 form-control" rows="1"></textarea>
-            </div>
-            <div>
-                <button class="btn btn-primary btn-sm"> Post Comment </button>
-            </div>
-
-            <hr>
-            @include('shared.comments-box')
-        </div>
+        @include('shared.comments-box')
     </div>
 </div>
