@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Idea;
 use Illuminate\Http\Request;
 
-class IdeasController
+class IdeaController
 {
     public function store() {
 
