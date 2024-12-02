@@ -8,7 +8,7 @@
                     <h5 class="card-title mb-0"><a href="#"> Mario </a></h5>
                 </div>
             </div>
-            <div class="d-flex">
+            <div class="d-flex" style="gap: 10px;">
                 <a href={{ route('ideas.show', $idea->id) }}> View </a>
                 <a href={{ route('ideas.edit', $idea->id) }}> Edit </a>
                 <form method="POST" action={{ route('ideas.destroy', $idea->id) }}>
