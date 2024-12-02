@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\IdeaController;
+use App\Http\Controllers\IdeasController;
 use App\Http\Controllers\TermsController;
 use Illuminate\Support\Facades\Route;
 
@@ -11,12 +11,12 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
 
 Route::get('/terms', [TermsController::class, 'index']);
 
-Route::post('/ideas', [IdeaController::class, 'store'])->name('ideas.create');
+Route::post('/ideas', [IdeasController::class, 'store'])->name('ideas.create');
 
-Route::delete('/ideas/{idea}', [IdeaController::class, 'destroy'])->name('ideas.destroy');
+Route::delete('/ideas/{idea}', [IdeasController::class, 'destroy'])->name('ideas.destroy');
 
-Route::get(('/ideas/{idea}'), [IdeaController::class, 'show'])->name('ideas.show');
+Route::get(('/ideas/{idea}'), [IdeasController::class, 'show'])->name('ideas.show');
 
-Route::get('/ideas/{idea}/edit', [IdeaController::class, 'edit'])->name('ideas.edit');
+Route::get('/ideas/{idea}/edit', [IdeasController::class, 'edit'])->name('ideas.edit');
 
-Route::put('/ideas/{idea}', [IdeaController::class, 'update'])->name('ideas.update');
+Route::put('/ideas/{idea}', [IdeasController::class, 'update'])->name('ideas.update');
