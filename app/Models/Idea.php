@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Idea extends Model
 {
-    protected $fillable = ['content', 'likes'];
+    protected $guarded = ['id', 'created_at', 'updated_at', 'likes'];
 
     public function comments()
     {
