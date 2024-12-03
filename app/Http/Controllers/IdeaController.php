@@ -24,8 +24,6 @@ class IdeaController
 
         $idea = new Idea($validated);
 
-        $idea->save();
-
         return redirect()->route('dashboard')->with('success', 'Idea created successfully!');
     }
 
@@ -89,12 +87,11 @@ class IdeaController
      */
     public function update(Idea $idea)
     {
-        request()->validate([
+        $validated = request()->validate([
             'content' => 'required|min:5|max:255',
         ]);
 
-        $idea->content = request()->get('content', '');
-        $idea->save();
+        $idea->update($validated);
 
         return redirect()
             ->route('ideas.show', $idea->id)
