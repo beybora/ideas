@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IdeaController;
@@ -7,8 +8,6 @@ use App\Http\Controllers\TermsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-
-Route::get('/dashboard', [DashboardController::class, 'index']);
 
 Route::get('/terms', [TermsController::class, 'index']);
 
@@ -23,3 +22,7 @@ Route::get('/ideas/{idea}/edit', [IdeaController::class, 'edit'])->name('ideas.e
 Route::put('/ideas/{idea}', [IdeaController::class, 'update'])->name('ideas.update');
 
 Route::post('/ideas/{idea}/comments', [CommentController::class, 'store'])->name('ideas.comments.store');
+
+Route::get('/register', [AuthController::class, 'register'])->name('register');
+
+Route::post('/register', [AuthController::class, 'store']);
