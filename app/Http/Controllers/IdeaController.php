@@ -26,6 +26,7 @@ class IdeaController
         $validated['user_id'] = Auth::id();
 
         $idea = new Idea($validated);
+        $idea->save();
 
         return redirect()->route('dashboard')->with('success', 'Idea created successfully!');
     }
