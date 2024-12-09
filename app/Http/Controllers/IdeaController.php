@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Idea;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class IdeaController
 {
@@ -21,6 +22,8 @@ class IdeaController
         $validated = request()->validate([
             'content' => 'required|min:5|max:255',
         ]);
+
+        $validated['user_id'] = Auth::id();
 
         $idea = new Idea($validated);
 
