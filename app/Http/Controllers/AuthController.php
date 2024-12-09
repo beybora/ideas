@@ -31,7 +31,7 @@ class AuthController extends Controller
             'password' => Hash::make($validated['password']),
         ]);
 
-        return redirect()->route('dashboard')->with('success', 'User created successfully!');
+        return redirect()->route('login')->with('success', 'User created successfully!');
     }
 
     public function login()
@@ -46,7 +46,7 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        if (auth()->attempt($validated)) {
+        if (Auth::attempt($validated)) {
             request()->session()->regenerate();
             return redirect()->route('dashboard')->with('success', 'User logged in successfully!');
         }
@@ -57,7 +57,7 @@ class AuthController extends Controller
     }
 
     public function logout() {
-        auth()->logout();
+        Auth::logout();
 
         request()->session()->invalidate();
         request()->sessioN()->regenerateToken();
