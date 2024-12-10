@@ -12,15 +12,15 @@ Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 Route::group(['prefix' => 'ideas/', 'as' => 'ideas.'], function () {
     Route::post('', [IdeaController::class, 'store'])->name('create');
 
-    Route::delete('{idea}', [IdeaController::class, 'destroy'])->name('destroy');
-
     Route::get('{idea}', [IdeaController::class, 'show'])->name('show');
 
-    Route::get('{idea}/edit', [IdeaController::class, 'edit'])->name('edit');
+    Route::get('{idea}/edit', [IdeaController::class, 'edit'])->name('edit')->middleware('auth');
 
-    Route::put('{idea}', [IdeaController::class, 'update'])->name('update');
+    Route::put('{idea}', [IdeaController::class, 'update'])->name('update')->middleware('auth');
 
-    Route::post('{idea}/comments', [CommentController::class, 'store'])->name('comments.store');
+    Route::delete('{idea}', [IdeaController::class, 'destroy'])->name('destroy')->middleware('auth');
+
+    Route::post('{idea}/comments', [CommentController::class, 'store'])->name('comments.store')->middleware('auth');
 });
 
 Route::get('/terms', [TermsController::class, 'index']);
