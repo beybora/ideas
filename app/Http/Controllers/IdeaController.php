@@ -32,22 +32,6 @@ class IdeaController
     }
 
     /**
-     * Handles the deletion of an Idea.
-     *
-     * Locates the Idea by ID, ensuring it exists, and then deletes it.
-     * Redirects to the dashboard with a success message once deletion is complete.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function destroy($id)
-    {
-        $idea = Idea::where('id', $id)->firstOrFail()->delete();
-
-        return redirect()->route('dashboard')->with('success', 'Idea deleted successfully!');
-    }
-
-    /**
      * Displays a specific Idea.
      *
      * Returns a view showing the details of the specified Idea instance.
@@ -64,6 +48,28 @@ class IdeaController
     }
 
     /**
+     * Handles the deletion of an Idea.
+     *
+     * Locates the Idea by ID, ensuring it exists, and then deletes it.
+     * Redirects to the dashboard with a success message once deletion is complete.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(Idea $idea)
+    {
+        if (Auth::id() !== $idea->user_id) {
+            abort(404);
+        }
+
+        $idea = Idea::where('id', $idea->id)
+            ->firstOrFail()
+            ->delete();
+
+        return redirect()->route('dashboard')->with('success', 'Idea deleted successfully!');
+    }
+
+    /**
      * Displays the edit form for an Idea.
      *
      * Sets an 'editing' variable to true to indicate that the user is in editing mode.
@@ -74,6 +80,10 @@ class IdeaController
      */
     public function edit(Idea $idea)
     {
+        if (Auth::id() !== $idea->user_id) {
+            abort(404);
+        }
+
         $editing = true;
 
         return view('ideas.show', compact('editing', 'idea'));
@@ -91,8 +101,12 @@ class IdeaController
      */
     public function update(Idea $idea)
     {
+        if (Auth::id() !== $idea->user_id) {
+            abort(404);
+        }
+
         $validated = request()->validate([
-            'content' => 'required|min:5|max:255',
+            'content' => 'required|min:4|max:255',
         ]);
 
         $idea->update($validated);
