@@ -5,6 +5,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IdeaController;
 use App\Http\Controllers\TermsController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
@@ -27,4 +28,6 @@ Route::group(['prefix' => 'ideas/', 'as' => 'ideas.'], function () {
     Route::get('/terms', [TermsController::class, 'index']);
 });
 
-require __DIR__.'/auth.php';
+Route::resource('users', UserController::class)->only('show', 'edit', 'update');
+
+require __DIR__ . '/auth.php';
